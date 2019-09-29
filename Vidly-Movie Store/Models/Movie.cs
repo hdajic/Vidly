@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace Vidly_Movie_Store.Models
+{
+    public class Movie
+    {
+        public int Id { get; set; }
+
+        [Required(ErrorMessage = "Please enter movie's name.")]
+        [StringLength(255)]
+        public string Name { get; set; }
+
+        [Display(Name = "Release Date")]
+        public DateTime ReleaseDate { get; set; }
+
+        public DateTime DateAddedInDb { get; set; }
+
+        [Display(Name = "Number in Stock")]
+        [Range(1, 20)]
+        public byte NumberInStock { get; set; }
+
+        public Genres Genres { get; set; }
+
+        [Required]
+        [Display(Name = "Genre")]
+        public byte GenresId { get; set; }
+    }
+}
