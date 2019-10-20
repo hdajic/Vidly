@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Vidly_Movie_Store.Models;
 using System.Data.Entity;
 using Vidly_Movie_Store.ViewModel;
+using Vidly_Movie_Store.Models.IdentityModels;
 
 namespace Vidly_Movie_Store.Controllers
 {
@@ -24,12 +25,14 @@ namespace Vidly_Movie_Store.Controllers
         }
         public ActionResult Index()
         {
-            //var movies = _context.Movies.Include(m => m.Genres).ToList();
+            if(User.IsInRole(RoleName.CanManageMovies))
+                return View("List");
 
-            return View();
+            return View("ReadOnlyList");
         }
 
         [Route("Movies/Details/{id}")]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Details(int id)
         {
             var movie = _context.Movies.Include(m => m.Genres).SingleOrDefault(m => m.Id == id);
@@ -42,6 +45,7 @@ namespace Vidly_Movie_Store.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Save(Movie movie)
         {
             if (!ModelState.IsValid)
@@ -71,6 +75,7 @@ namespace Vidly_Movie_Store.Controllers
             return RedirectToAction("Index", "Movies");
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult New()
         {
             var Genres = _context.Genres.ToList();
@@ -82,6 +87,8 @@ namespace Vidly_Movie_Store.Controllers
             return View("MovieForm", viewModel);
         }
 
+
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
             var movie = _context.Movies.SingleOrDefault(m => m.Id == id);

@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Vidly_Movie_Store.Models;
+using Vidly_Movie_Store.Models.IdentityModels;
 
 namespace Vidly_Movie_Store
 {

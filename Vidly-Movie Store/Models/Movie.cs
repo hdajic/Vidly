@@ -28,5 +28,7 @@ namespace Vidly_Movie_Store.Models
         [Required]
         [Display(Name = "Genre")]
         public byte GenresId { get; set; }
+
+        public byte NumberAvailable { get; set; }
     }
 }

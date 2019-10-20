@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Vidly_Movie_Store.Models;
 using Vidly_Movie_Store.ViewModel;
 using System.Data.Entity;
+using Vidly_Movie_Store.Models.IdentityModels;
 
 namespace Vidly_Movie_Store.Controllers
 {
@@ -64,6 +65,7 @@ namespace Vidly_Movie_Store.Controllers
 
                 return RedirectToAction("Index", "Customers");
             }
+
             public ActionResult Index()
             {
 

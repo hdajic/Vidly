@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using Vidly_Movie_Store.Models;
+using Vidly_Movie_Store.Models.IdentityModels;
 
 namespace Vidly_Movie_Store
 {
@@ -54,9 +55,9 @@ namespace Vidly_Movie_Store
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "719136435180271",
+               appSecret: "c89ce2525e75efaa139010225658fe85");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

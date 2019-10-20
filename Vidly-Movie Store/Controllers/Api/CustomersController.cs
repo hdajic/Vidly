@@ -8,6 +8,7 @@ using System.Web.Http;
 using Vidly_Movie_Store.Dtos;
 using Vidly_Movie_Store.Models;
 using System.Data.Entity;
+using Vidly_Movie_Store.Models.IdentityModels;
 
 namespace Vidly_Movie_Store.Controllers.Api
 {
@@ -21,10 +22,16 @@ namespace Vidly_Movie_Store.Controllers.Api
         }
 
         // GET  /api/customers
-        public IHttpActionResult GetCustomers()
+        public IHttpActionResult GetCustomers(string query = null)
         {
-            var customers = _context.Customers
-                .Include(c => c.MembershipType).ToList()
+            var customerQuery = _context.Customers
+                .Include(c => c.MembershipType);
+
+            if (!String.IsNullOrWhiteSpace(query))
+                customerQuery = customerQuery.Where(c => c.Name.Contains(query));
+            
+            var customers = customerQuery
+                .ToList()
                 .Select(Mapper.Map<Customer, CustomerDto>);
 
             return Ok(customers);
